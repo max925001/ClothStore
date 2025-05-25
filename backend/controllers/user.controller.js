@@ -4,9 +4,9 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 const cookieOptions = {
     maxAge: 7*24*60*60*1000,
     httpOnly: true,
-    // secure: process.env.NODE_ENV === 'production' ? true : false,
-    // sameSite:'None',
-    // secure: true
+    secure: process.env.NODE_ENV === 'production' ? true : false,
+    sameSite:'None',
+    secure: true
 
 }
 export const register = async (req,res) =>{
