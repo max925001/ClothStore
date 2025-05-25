@@ -14,7 +14,10 @@ import BookDetail from './pages/BookDetail'
 import AdminDashboard from './pages/AdminDashboard'
 
 function App() {
-const userData = JSON.parse(localStorage.getItem('data')) || {}; 
+
+ 
+  const userData = JSON.parse(localStorage.getItem('data')) || {}; 
+
   return (
     <Routes>
       <Route path='/' element={<ProtectedRoute><Home/></ProtectedRoute>}/>
