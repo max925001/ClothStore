@@ -1,5 +1,7 @@
 import Book from '../models/book.model.js';
 import { uploadOnCloudinary } from '../utils/cloudinary.js';
+import cloudinary from 'cloudinary';
+
 
 export const createBook = async (req, res) => {
   const { bookName, price, type, author, publication, isbn, description } = req.body;
