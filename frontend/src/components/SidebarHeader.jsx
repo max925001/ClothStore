@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaBars, FaTimes, FaHome, FaUser, FaTachometerAlt, FaSignOutAlt, FaUserCircle } from 'react-icons/fa';
@@ -6,21 +6,10 @@ import { logout } from '../redux/slices/user.slice';
 
 const SidebarHeader = ({ children, backgroundImage }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [user, setUser] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoggedIn,data} = useSelector((state) => state.auth);
-const imageUrl = (data?.avatar?.secure_url=== '') ? null : data?.avatar?.secure_url;
-  // Fetch user from local storage
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('data'));
-    if (isLoggedIn) {
-      setUser(storedUser);
-    } else {
-      setUser(null);
-    }
-  }, [isLoggedIn]);
-  console.log(user)
+  const { isLoggedIn, data } = useSelector((state) => state.auth);
+  const imageUrl = data?.avatar?.secure_url || null;
 
   // Toggle sidebar
   const toggleSidebar = () => {
@@ -30,15 +19,22 @@ const imageUrl = (data?.avatar?.secure_url=== '') ? null : data?.avatar?.secure_
   // Handle logout
   const handleLogout = () => {
     dispatch(logout());
-    localStorage.removeItem('user');
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('data');
+    localStorage.removeItem('role');
     localStorage.removeItem('token');
     navigate('/login');
   };
 
+  // Close sidebar on route change
+  useEffect(() => {
+    setIsSidebarOpen(false);
+  }, [navigate]);
+
   return (
-    <div className="flex flex-col min-h-screen bg-[#1F1F1F] text-white ">
+    <div className="flex flex-col min-h-screen bg-[#1F1F1F] text-white">
       {/* Header */}
-      <header className=" p-3 sm:p-4 flex items-center justify-between shadow-md fixed top-0 left-0 right-0 z-50">
+      <header className="p-3 sm:p-4 flex items-center justify-between shadow-md fixed top-0 left-0 right-0 z-50">
         <div className="flex items-center space-x-3 sm:space-x-4">
           <button
             onClick={toggleSidebar}
@@ -83,7 +79,7 @@ const imageUrl = (data?.avatar?.secure_url=== '') ? null : data?.avatar?.secure_
                   <span className="text-sm sm:text-base">Home</span>
                 </Link>
               </li>
-              {user && (
+              {isLoggedIn && data && (
                 <li>
                   <Link
                     to="/profile"
@@ -104,7 +100,7 @@ const imageUrl = (data?.avatar?.secure_url=== '') ? null : data?.avatar?.secure_
                   </Link>
                 </li>
               )}
-              {user && user.role === 'ADMIN' && (
+              {isLoggedIn && data && data.role === 'ADMIN' && (
                 <li>
                   <Link
                     to="/admin/dashboard"
@@ -116,14 +112,14 @@ const imageUrl = (data?.avatar?.secure_url=== '') ? null : data?.avatar?.secure_
                   </Link>
                 </li>
               )}
-              {user && (
+              {isLoggedIn && (
                 <li>
                   <button
                     onClick={handleLogout}
                     className="flex items-center cursor-pointer space-x-3 p-3 w-full text-left rounded-md hover:bg-[#3A3A3A] text-orange-300 hover:text-orange-500 transition duration-200"
                   >
                     <FaSignOutAlt size={18} />
-                    <span className="text-sm sm:text-base ">Logout</span>
+                    <span className="text-sm sm:text-base">Logout</span>
                   </button>
                 </li>
               )}

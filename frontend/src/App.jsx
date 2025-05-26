@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -15,7 +15,7 @@ import AdminDashboard from './pages/AdminDashboard'
 
 function App() {
 
- 
+
   const userData = JSON.parse(localStorage.getItem('data')) || {}; 
 
   return (
@@ -27,7 +27,7 @@ function App() {
       <Route path='/profile' element={<ProtectedRoute><Profile/></ProtectedRoute>}/>
       <Route path='/find-book' element={<ProtectedRoute><BookStore/></ProtectedRoute>}/>
       <Route path='/book-detail/:bookId' element={<ProtectedRoute><BookDetail/></ProtectedRoute>}/>
-      <Route  path='/admin/dashboard' element={<ProtectedRoute><AdminDashboard/></ProtectedRoute>}/>
+      <Route  path='/admin/dashboard' element={<ProtectedRoute>{(userData?.role === 'ADMIN')? <AdminDashboard/> : <Navigate to="/" />}</ProtectedRoute>}/>
     </Routes>
   )
 }
