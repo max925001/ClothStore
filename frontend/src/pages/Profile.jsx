@@ -5,7 +5,7 @@ import { FaUserCircle, FaCamera } from 'react-icons/fa';
 import { Toaster, toast } from 'react-hot-toast';
 import { getUserData, updateUser } from '../redux/slices/user.slice';
 import SidebarHeader from '../components/SidebarHeader';
-import bgbook from '../assets/bgbook.png';
+
 
 const Profile = () => {
   const dispatch = useDispatch();

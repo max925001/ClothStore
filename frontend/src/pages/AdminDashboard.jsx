@@ -6,7 +6,7 @@ function AdminDashboard() {
   const navigate = useNavigate();
 
   const handleCreateBook = () => {
-    navigate('/createbook');
+    navigate('/createcloth');
   };
 
   return (
@@ -18,7 +18,7 @@ function AdminDashboard() {
             Welcome, Admin!
           </h1>
           <p className="text-gray-300 text-sm sm:text-base lg:text-lg mb-6 sm:mb-8">
-            Manage your bookstore with ease. Start by adding a new book to the collection.
+            Manage your clothstore with ease. Start by adding a new cloth to the collection.
           </p>
 
           {/* Create Book Button */}
@@ -26,7 +26,7 @@ function AdminDashboard() {
             onClick={handleCreateBook}
             className="px-6 sm:px-8 py-2 sm:py-3 bg-orange-500 cursor-pointer text-white rounded-md hover:bg-orange-600 transition duration-200 text-sm sm:text-base lg:text-lg font-semibold shadow-lg hover:shadow-xl focus:outline-none"
           >
-            Create New Book
+            Create New Cloth
           </button>
         </div>
       </div>

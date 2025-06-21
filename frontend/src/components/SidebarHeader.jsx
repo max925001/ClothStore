@@ -43,7 +43,7 @@ const SidebarHeader = ({ children, backgroundImage }) => {
           >
             {isSidebarOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
           </button>
-          <h1 className="text-lg sm:text-xl font-bold text-orange-500">BookStore</h1>
+          <h1 className="text-lg sm:text-xl font-bold text-orange-500">ClothStore</h1>
         </div>
       </header>
 

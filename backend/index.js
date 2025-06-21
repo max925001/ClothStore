@@ -6,7 +6,7 @@ import authrouter from './routes/user.route.js'
 import morgan from 'morgan'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
-import bookrouter from './routes/book.route.js'
+import clothrouter from './routes/cloths.route.js'
 
 const app = express()
 const PORT = process.env.PORT || 5001
@@ -31,7 +31,7 @@ app.use(cookieParser())
 app.use(morgan('dev'))
 
 app.use('/api/v1/user',authrouter)
-app.use('/api/v1/book',bookrouter)
+app.use('/api/v1/cloth',clothrouter)
 
 
 app.listen(PORT, () => {

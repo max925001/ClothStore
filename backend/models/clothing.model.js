@@ -1,14 +1,14 @@
 import mongoose from 'mongoose';
 
-const bookSchema = new mongoose.Schema(
+const clothingSchema = new mongoose.Schema(
   {
-    bookName: {
+    itemName: {
       type: String,
-      required: [true, 'Book name is required'],
+      required: [true, 'Item name is required'],
       trim: true,
       lowercase: true,
     },
-    bookImage: {
+    itemImages: {
       type: [
         {
           public_id: { type: String, required: true },
@@ -19,9 +19,9 @@ const bookSchema = new mongoose.Schema(
         validator: function (images) {
           return images.length >= 1 && images.length <= 5;
         },
-        message: 'Book must have at least 1 and at most 5 images',
+        message: 'Item must have at least 1 and at most 5 images',
       },
-      required: [true, 'At least one book image is required'],
+      required: [true, 'At least one item image is required'],
     },
     reviews: [
       {
@@ -54,27 +54,13 @@ const bookSchema = new mongoose.Schema(
       required: [true, 'Price is required'],
       min: [0, 'Price cannot be negative'],
     },
-    type: {
+    itemType: {
       type: String,
       enum: {
-        values: ['comedy', 'study', 'romantic', 'horror', 'fiction', 'non-fiction', 'mystery', 'fantasy', 'biography'],
-        message: '{VALUE} is not a valid book type',
+        values: ['shirt', 'pants', 'shoes', 'sports gear', 'jacket', 'dress', 'skirt', 'sweater', 'accessories'],
+        message: '{VALUE} is not a valid item type',
       },
-      required: [true, 'Book type is required'],
-    },
-    author: {
-      type: String,
-      required: [true, 'Author is required'],
-      trim: true,
-    },
-    publication: {
-      type: String,
-      required: [true, 'Publication is required'],
-      trim: true,
-    },
-    isbn: {
-      type: String,
-      trim: true,
+      required: [true, 'Item type is required'],
     },
     description: {
       type: String,
@@ -86,7 +72,7 @@ const bookSchema = new mongoose.Schema(
 );
 
 // Pre-save hook to calculate averageRating
-bookSchema.pre('save', function (next) {
+clothingSchema.pre('save', function (next) {
   if (this.reviews.length > 0) {
     const totalRating = this.reviews.reduce((sum, review) => sum + review.rating, 0);
     this.averageRating = totalRating / this.reviews.length;
@@ -96,4 +82,4 @@ bookSchema.pre('save', function (next) {
   next();
 });
 
-export default mongoose.model('Book', bookSchema);
+export default mongoose.model('Clothing', clothingSchema);
