@@ -29,7 +29,7 @@ const Login = () => {
   return (
     <div className=" overflow-hidden min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat " style={{ backgroundImage:`url(${bgcloth})` }}>
       <div className="bg-transparent bg-opacity-50 p-6 sm:p-8 md:p-10 rounded-xl shadow-2xl w-full max-w-xs sm:max-w-sm md:max-w-md backdrop-blur-md">
-        <h2 className="text-2xl sm:text-3xl font-bold text-orange-500 text-center mb-6 sm:mb-8">Welcome to Book Haven</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold text-orange-500 text-center mb-6 sm:mb-8">Welcome to Cloth Store</h2>
         <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
           <div>
             <label htmlFor="email" className="block text-sm sm:text-base font-medium text-orange-500">Email</label>
